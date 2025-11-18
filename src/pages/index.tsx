@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Company Portal - Enterprise Management</title>
+        <title>Company Portal - Company Management Portal</title>
         <meta name="description" content="Company management portal" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

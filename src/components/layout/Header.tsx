@@ -23,14 +23,8 @@ export function Header() {
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Company Portal
               </h1>
-              <p className="text-xs text-gray-500">Enterprise Management</p>
+              <p className="text-xs text-gray-500">Company Management Portal</p>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 text-xs font-medium rounded-full border border-green-200">
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-              System Active
-            </span>
           </div>
         </div>
       </div>

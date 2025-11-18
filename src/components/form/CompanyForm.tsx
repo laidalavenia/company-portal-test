@@ -57,21 +57,6 @@ export function CompanyForm({ onSubmit }: CompanyFormProps) {
           required
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <FormInput
-            label="Website"
-            name="website"
-            type="url"
-            placeholder="https://company.com"
-          />
-          <FormInput
-            label="Phone Number"
-            name="phone"
-            type="tel"
-            placeholder="+1 (555) 123-4567"
-          />
-        </div>
-
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Company Description
