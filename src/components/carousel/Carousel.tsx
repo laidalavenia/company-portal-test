@@ -2,61 +2,70 @@ import { CAROUSEL_SLIDES, CAROUSEL_INTERVAL } from "@/constants";
 
 export function Carousel() {
   return (
-    <section className="container mx-auto px-4 py-6 sm:py-8">
+    <section className="container mx-auto px-4 py-6">
       <div
-        className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl bg-gray-900"
-        style={{ height: "250px" }}
-        x-data={`{
-          currentSlide: 0,
-          slides: [${CAROUSEL_SLIDES.join(",")}],
-          autoplay: null,
-          init() {
-            this.startAutoplay();
-          },
-          startAutoplay() {
-            this.autoplay = setInterval(() => {
-              this.next();
-            }, ${CAROUSEL_INTERVAL});
-          },
-          stopAutoplay() {
-            clearInterval(this.autoplay);
-          },
-          next() {
-            this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-          },
-          prev() {
-            this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
-          }
-        }`}
-        x-init="init()"
+        className="relative overflow-hidden rounded-xl bg-gray-900 border border-gray-700"
+        style={{ height: "280px" }}
+        {...{
+          "x-data": `{
+            currentSlide: 0,
+            slides: [${CAROUSEL_SLIDES.join(",")}],
+            autoplay: null,
+            init() {
+              this.startAutoplay();
+            },
+            startAutoplay() {
+              this.autoplay = setInterval(() => {
+                this.next();
+              }, ${CAROUSEL_INTERVAL});
+            },
+            stopAutoplay() {
+              clearInterval(this.autoplay);
+            },
+            next() {
+              this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            },
+            prev() {
+              this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+            }
+          }`,
+          "x-init": "init()",
+        }}
       >
         <div className="relative h-full">
           {CAROUSEL_SLIDES.map((num) => (
             <div
               key={num}
-              x-show={`currentSlide === ${num - 1}`}
-              x-transition-enter="transition ease-out duration-500"
-              x-transition-enter-start="opacity-0 transform translate-x-full"
-              x-transition-enter-end="opacity-100 transform translate-x-0"
-              x-transition-leave="transition ease-in duration-500"
-              x-transition-leave-start="opacity-100 transform translate-x-0"
-              x-transition-leave-end="opacity-0 transform -translate-x-full"
+              {...{
+                "x-show": `currentSlide === ${num - 1}`,
+                "x-transition:enter": "transition ease-out duration-300",
+                "x-transition:enter-start": "opacity-0",
+                "x-transition:enter-end": "opacity-100",
+                "x-transition:leave": "transition ease-in duration-300",
+                "x-transition:leave-start": "opacity-100",
+                "x-transition:leave-end": "opacity-0",
+              }}
               className="absolute inset-0"
               style={{ display: "none" }}
             >
               <img
-                src={`https://picsum.photos/1200/300?random=${num}`}
+                src={`https://picsum.photos/1200/280?random=${num}`}
                 alt={`Slide ${num}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center">
-                <div className="px-6 sm:px-12 text-white max-w-2xl">
-                  <h2 className="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4">
-                    Innovation Slide {num}
-                  </h2>
-                  <p className="text-sm sm:text-lg text-gray-200">
-                    Discover cutting-edge solutions for modern enterprises
-                  </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent flex items-end">
+                <div className="p-6 sm:p-8 text-white w-full">
+                  <div className="max-w-2xl">
+                    <span className="inline-block px-3 py-1 bg-primary-500 text-white text-xs font-medium rounded-full mb-3">
+                      Featured
+                    </span>
+                    <h2 className="text-xl sm:text-3xl font-bold mb-2">
+                      Innovation Slide {num}
+                    </h2>
+                    <p className="text-sm sm:text-base text-gray-200">
+                      Discover cutting-edge solutions for modern enterprises
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -64,11 +73,11 @@ export function Carousel() {
         </div>
 
         <button
-          x-on-click="stopAutoplay(); prev();"
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full transition-all z-10"
+          {...{ "x-on:click": "stopAutoplay(); prev();" }}
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors z-10"
         >
           <svg
-            className="w-4 h-4 sm:w-6 sm:h-6"
+            className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -82,11 +91,11 @@ export function Carousel() {
           </svg>
         </button>
         <button
-          x-on-click="stopAutoplay(); next();"
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full transition-all z-10"
+          {...{ "x-on:click": "stopAutoplay(); next();" }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors z-10"
         >
           <svg
-            className="w-4 h-4 sm:w-6 sm:h-6"
+            className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -100,14 +109,16 @@ export function Carousel() {
           </svg>
         </button>
 
-        <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 z-10">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {CAROUSEL_SLIDES.map((_, idx) => (
             <button
               key={idx}
-              x-on-click={`stopAutoplay(); currentSlide = ${idx};`}
-              className="transition-all"
-              x-bind-class={`currentSlide === ${idx} ? 'w-6 sm:w-8 bg-white' : 'w-2 sm:w-3 bg-white/50'`}
-              style={{ height: "8px", borderRadius: "4px" }}
+              {...{
+                "x-on:click": `stopAutoplay(); currentSlide = ${idx};`,
+                "x-bind:class": `currentSlide === ${idx} ? 'w-8 bg-white' : 'w-2 bg-white/50'`,
+              }}
+              className="transition-all rounded-full"
+              style={{ height: "8px" }}
             ></button>
           ))}
         </div>

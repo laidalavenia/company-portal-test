@@ -6,18 +6,23 @@ interface TableHeaderProps {
   onSort: (field: SortField) => void;
 }
 
-export function TableHeader({
+interface SortButtonProps {
+  field: SortField;
+  label: string;
+  sortField: SortField;
+  sortDirection: SortDirection;
+  onSort: (field: SortField) => void;
+}
+
+// ✅ FIXED: Component declared OUTSIDE of render
+function SortButton({
+  field,
+  label,
   sortField,
   sortDirection,
   onSort,
-}: TableHeaderProps) {
-  const SortButton = ({
-    field,
-    label,
-  }: {
-    field: SortField;
-    label: string;
-  }) => (
+}: SortButtonProps) {
+  return (
     <button
       onClick={() => onSort(field)}
       className="flex items-center gap-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors text-sm"
@@ -42,21 +47,51 @@ export function TableHeader({
       )}
     </button>
   );
+}
 
+export function TableHeader({
+  sortField,
+  sortDirection,
+  onSort,
+}: TableHeaderProps) {
   return (
     <thead className="bg-gray-50 border-b border-gray-200">
       <tr>
         <th className="px-4 py-3 text-left">
-          <SortButton field="name" label="Name" />
+          <SortButton
+            field="name"
+            label="Name"
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={onSort}
+          />
         </th>
         <th className="px-4 py-3 text-left hidden sm:table-cell">
-          <SortButton field="industry" label="Industry" />
+          <SortButton
+            field="industry"
+            label="Industry"
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={onSort}
+          />
         </th>
         <th className="px-4 py-3 text-left hidden md:table-cell">
-          <SortButton field="country" label="Location" />
+          <SortButton
+            field="country"
+            label="Location"
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={onSort}
+          />
         </th>
         <th className="px-4 py-3 text-left hidden lg:table-cell">
-          <SortButton field="employeeCount" label="Employees" />
+          <SortButton
+            field="employeeCount"
+            label="Employees"
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={onSort}
+          />
         </th>
       </tr>
     </thead>

@@ -52,7 +52,7 @@ export default function Home() {
   // Form submit handler
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    showToast("Company registered successfully! 🎉", "success");
+    showToast("Company registered successfully!", "success");
     e.currentTarget.reset();
   };
 
@@ -62,16 +62,26 @@ export default function Home() {
         <title>Company Portal - Enterprise Management</title>
         <meta name="description" content="Company management portal" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+      <div className="min-h-screen bg-gray-50">
         <Header />
 
         <Carousel />
 
         <Navigation activeView={activeView} onViewChange={setActiveView} />
 
-        <div className="container mx-auto px-4 pb-8">
+        <div className="container mx-auto px-4 pb-12">
           {activeView === "table" ? (
             <CompanyTable
               companies={currentItems}
